@@ -29,6 +29,16 @@ handlers:
 - url: /pledge
   script: fighthaze.app
 
+# cron job
+- url: /getpsi
+  script: fighthaze.app
+  login: admin
+
+# cron job
+- url: /sendreminder
+  script: fighthaze.app
+  login: admin
+
 # All other pages require login
 - url: /.*
   script: fighthaze.app

@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title> FightHaze</title>
+    <title> The Drunkards</title>
     <meta property="og:url"                content="http://fighthazepledge.appspot.com/pledge" />
     <meta property="og:title"              content="FightHaze" />
     <meta property="og:description"        content="To fight the haze, I pledge to buy products certified for sustainability whenever there are choices." />
@@ -25,11 +25,17 @@
     <!-- Top bar -->
     <div class="row-fluid top-container">
       <div class="span5">
-        <a href="/"><img class="logo" src="../images/logo.png"></a>
+        <a href="/"><img class="logo" src="../images/nus.jpeg"></a>
       </div>
+      {% if user_nickname %}
+      <div class="span4 offset8 signin-align">
+        <span> {{ user_nickname }} <a href="{{ logout }}">logout</a></span>
+      </div>	
+      {% else %}
       <div class="span3 offset9 signin-align">
         <span> Login with <a href="/fighthaze"><img src="../images/google.png"></a></span>
       </div>
+      {% endif %}
     </div>
     <!-- End of top bar -->
     
@@ -38,7 +44,7 @@
       <div class="navbar-inner">
         <ul class="nav">
           <li><a href="/">Home</a></li>
-	  <li><a href="/pledge">Pledge</a></li>
+	  <li><a href="/pledge">Stalls</a></li>
 	  {% if user_nickname %}
 	  <li><a href="/reminder">Reminder</a></li>
 	  {% endif %}
@@ -47,12 +53,11 @@
       </div>
     </div>
     
-    <h3 class="centertext">Make a pledge and share it on Facebook.</h2>
+    <h3 class="centertext">AYAM PENYET</h2>
 
     <div class="row-fluid">
-      <figure><img class="hazepic" src="../images/smog.jpg"></figure>
-      <p class="centertext"> To fight the haze, I pledge to buy products certified for sustainability whenever there are choices.</p>
-      <div class="fb-share-button offset5" data-href="http://fighthazepledge.appspot.com/pledge" data-layout="button_count"></div>
+      <figure><img class="hazepic" src="../images/ayam.jpg"></figure>
+      <p class="centertext"> Image Source:<p href="https://www.google.com.sg/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj7r8GUucXNAhUbSY8KHe0UCksQjRwIBw&url=%2Furl%3Fsa%3Di%26rct%3Dj%26q%3D%26esrc%3Ds%26source%3Dimages%26cd%3D%26cad%3Drja%26uact%3D8%26ved%3D0ahUKEwj7r8GUucXNAhUbSY8KHe0UCksQjRwIBw%26url%3Dhttps%253A%252F%252Fwww.flickr.com%252Fphotos%252Fkeropok%252Falbums%252F72157622721374032%252F%26bvm%3Dbv.125596728%2Cd.c2I%26psig%3DAFQjCNHhFjn29uego55sI82RB1vOKm8HVA%26ust%3D1467022048333832&bvm=bv.125596728,d.c2I&psig=AFQjCNHhFjn29uego55sI82RB1vOKm8HVA&ust=1467022048333832" target="_blank">Frontier Canteen</a>.</figcaption></figure>
     </div>
     
     <br>
