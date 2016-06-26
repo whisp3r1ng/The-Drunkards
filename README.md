@@ -1,4 +1,5 @@
 # The-Drunkards
+# Use the Carousel template
 # important websites:
 http://getbootstrap.com/
 https://github.com/knmnyn/orbital16-bootstrap
