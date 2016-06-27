@@ -17,3 +17,8 @@ div > img{
 p{
     text-align:center;
 }
+
+footer {
+    position: relative;
+    bottom: 0;
+}
