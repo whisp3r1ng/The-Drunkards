@@ -19,6 +19,6 @@ p{
 }
 
 footer {
-    position: relative;
-    bottom: 0;
+    position: absolute;
+    bottom: -20%;
 }
