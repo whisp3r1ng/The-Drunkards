@@ -28,8 +28,19 @@ class stall1(webapp2.RequestHandler): #Handler for the stores
         template = jinja_environment.get_template('stall1.html')
         self.response.out.write(template.render())
 
+class stall2(webapp2.RequestHandler): #Handler for the stores
+    def get(self):
+        template = jinja_environment.get_template('stall2.html')
+        self.response.out.write(template.render())
+
+class stall3(webapp2.RequestHandler): #Handler for the stores
+    def get(self):
+        template = jinja_environment.get_template('stall3.html')
+        self.response.out.write(template.render())
 
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/about', About),
-                               ('/stall1', stall1)],
+                               ('/stall1', stall1),
+                               ('/stall2', stall2),
+                               ('/stall3', stall3)],
                                debug=True)
