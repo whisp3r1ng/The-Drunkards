@@ -17,7 +17,19 @@ class MainPage(webapp2.RequestHandler): #Handler for the main page
         template = jinja_environment.get_template('index.html')
         self.response.out.write(template.render())
 
+class About(webapp2.RequestHandler): #Handler for the about page
+
+    def get(self):
+        template = jinja_environment.get_template('about.html')
+        self.response.out.write(template.render())
+
+class stall1(webapp2.RequestHandler): #Handler for the stores
+    def get(self):
+        template = jinja_environment.get_template('stall1.html')
+        self.response.out.write(template.render())
 
 
-app = webapp2.WSGIApplication([('/', MainPage)],
+app = webapp2.WSGIApplication([('/', MainPage),
+                               ('/about', About),
+                               ('/stall1', stall1)],
                                debug=True)
