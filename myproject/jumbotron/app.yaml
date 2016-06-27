@@ -27,6 +27,12 @@ handlers:
 - url: /stall1
   script: thedrunkards01.app
 
+- url: /stall2
+  script: thedrunkards01.app
+
+- url: /stall3
+  script: thedrunkards01.app
+
 libraries:
 - name: jinja2
   version: latest
