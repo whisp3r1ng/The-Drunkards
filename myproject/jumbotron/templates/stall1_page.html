@@ -47,6 +47,23 @@
           </div> 
           <a class="navbar-brand" href="/"> <font size="10" color="grey">The Drunkards</font> </a>
         </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+        {% if user_nickname %}
+         <div class="span4 offset8 signin-align">
+            <span> {{ user_nickname }} <a href="{{ logout }}">logout</a></span>
+        </div>  
+          {% else %}
+        <div class="span3 offset9 signin-align">
+            <span> Login with <a href="/thedrunkards"><img src="../images/google.png"></a></span>
+        </div>
+        {% endif %}
+          {% if user_nickname %}
+          <li><a href="/stall1_page">Ayam Penyet</a></li>
+          {% endif %}
+    </div>
+          </form>
+        </div><!--/.navbar-collapse -->
       </div>
     </nav>
 
@@ -54,8 +71,10 @@
     <div class="jumbotron">
       <div class="container">
         <h1 align="center">Ayam Penyet</h1>
-        <p align="left">This is a web application for NUS Orbital 2016 Project Gemini.</p>
-        <p align="left"> Menu: Dory Penyet $3.50, Ayam Penyet $4.00.</p>
+        <p align="left"> Edit Header Here: </p>
+        <p align="left">(WE NEED TO CREATE A FORM SUBMISSION HERE) This is a web application for NUS Orbital 2016 Project Gemini.</p>
+        <p align="left"> Edit Menu Here: </p>
+        <p align="left">(WE NEED TO CREATE A FORM SUBMISSION HERE) Menu: Dory Penyet $3.50, Ayam Penyet $4.00.</p>
       </div>
     </div>
 
@@ -64,15 +83,15 @@
       <div class="row">
         <div class="col-md-4">
           <h2 align="center">Items in queue:</h2>
-          <p>- </p>
+          <p>(WE NEED TO CREATE A FORM SUBMISSION HERE)</p>
         </div>
         <div class="col-md-4">
           <h2 align="center">Estimated waiting time (in minutes):</h2>
-          <p>0</p>
+          <p>WE NEED TO AUTO GENERATE TIMINGS HERE</p>
        </div>
         <div class="col-md-4">
           <h2 align="center">Special offers:</h2>
-          <p>-</p>
+          <p>(WE NEED TO CREATE A FORM SUBMISSION HERE)</p>
         </div>
       </div>
 

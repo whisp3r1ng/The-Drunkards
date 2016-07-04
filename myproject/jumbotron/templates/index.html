@@ -45,17 +45,25 @@
           <div class="span5">
               <img src="../images/nus.jpeg" class="img-responsive" alt="Responsive image" width="30%" height=auto>
           </div> 
-          <a class="navbar-brand" href="/"> The Drunkards </a>
+          <a class="navbar-brand" href="/"> <font size="10" color="grey">The Drunkards</font> </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
+        {% if user_nickname %}
+         <div class="span4 offset8 signin-align">
+            <span> {{ user_nickname }} <a href="{{ logout }}">logout</a></span>
+        </div>  
+          {% else %}
+        <div class="span3 offset9 signin-align">
+            <span> <font size="3" color="white">Login with(for stallholders):</font> <a href="/thedrunkards"><img src="../images/google.png"></a></span>
+        </div>
+        {% endif %}
+          {% if user_nickname %}
+          <li><a href="/stall1_page">Ayam Penyet</a></li>
+          <li><a href="/stall2_page">Salad Bar</a></li>
+          <li><a href="/stall3_page">Huang's</a></li>
+          {% endif %}
+    </div>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
