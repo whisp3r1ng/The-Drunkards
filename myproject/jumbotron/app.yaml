@@ -27,21 +27,12 @@ handlers:
 - url: /stall1
   script: thedrunkards01.app
 
-- url: /stall1_page
-  script: thedrunkards01.app
-  login: required
-
 - url: /stall2
-  script: thedrunkards01.app
-
-- url: /stall2_page
   script: thedrunkards01.app
 
 - url: /stall3
   script: thedrunkards01.app
 
-- url: /stall3_page
-  script: thedrunkards01.app
 
 # All other pages require login
 - url: /.*

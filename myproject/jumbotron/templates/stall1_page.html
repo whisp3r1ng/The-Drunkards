@@ -49,18 +49,14 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
-        {% if user_nickname %}
-         <div class="span4 offset8 signin-align">
-            <span> {{ user_nickname }} <a href="{{ logout }}">logout</a></span>
-        </div>  
-          {% else %}
-        <div class="span3 offset9 signin-align">
-            <span> Login with <a href="/thedrunkards"><img src="../images/google.png"></a></span>
-        </div>
-        {% endif %}
-          {% if user_nickname %}
-          <li><a href="/stall1_page">Ayam Penyet</a></li>
-          {% endif %}
+            {% if user_nickname %}
+              <div style="position:relative;left:400px"><font color="white"> {{ user_nickname }} </font><a class="btn btn-primary btn-lg" role="button" href="{{ logout }}">logout</a>
+                <li><a href="/stall1_page">Ayam Penyet</a></li>
+                </div>  
+            {% else %}
+             <div><a class="btn btn-primary btn-lg" href="thedrunkards" role="button" style="position:relative;left:400px;top:8px">Login for stallholders</a>
+             </div>
+           {% endif %}
     </div>
           </form>
         </div><!--/.navbar-collapse -->
@@ -83,6 +79,17 @@
       <div class="row">
         <div class="col-md-4">
           <h2 align="center">Items in queue:</h2>
+          <form action="/stall1_page" method="post">
+        <fieldset>
+    {% if curr_psi_limit %}
+          <p> Send me an email reminder of my pledge each time the PSI in Singapore exceeds <input class="input-small" type="number" name="psilimit" min="1" value="{{ curr_psi_limit }}"> for <input class="input-small" type="number" name="daylimit" min="1" max="{{ max_limit }}" value="{{ curr_day_limit }}"> consecutive days.</p>
+          <p><input type="submit" value="Edit"></p>
+    {% else %}
+    <p> Send me an email reminder of my pledge each time the PSI in Singapore exceeds <input class=" input-small" type="number" name="psilimit" min="1"> for <input class="input-small" type="number" name="daylimit" min="1" max="{{ max_limit }}"> consecutive days.</p>
+          <p><input type="submit" value="Submit"></p>
+    {% endif %}
+        </fieldset>
+    </form>
           <p>(WE NEED TO CREATE A FORM SUBMISSION HERE)</p>
         </div>
         <div class="col-md-4">
@@ -91,6 +98,13 @@
        </div>
         <div class="col-md-4">
           <h2 align="center">Special offers:</h2>
+          <form action="action_page.php">
+            <p align="center">Item to add:<br></p>
+            <p align="center"><input type="text" name="firstname" value="Mickey"><br></p>
+            <p align="center">Item to remove:<br></p>
+            <p align="center"><input type="text" name="lastname" value="Mouse"><br><br></p>
+            <p align="center"><input type="submit" value="Submit"></p>
+          </form>
           <p>(WE NEED TO CREATE A FORM SUBMISSION HERE)</p>
         </div>
       </div>

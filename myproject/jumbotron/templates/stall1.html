@@ -64,7 +64,15 @@
       <div class="row">
         <div class="col-md-4">
           <h2 align="center">Items in queue:</h2>
-          <p>- </p>
+          <p><form action="/" method="post">
+        <fieldset>
+    {% if curr_psi_limit %}
+          <p> Send me an email reminder of my pledge each time the PSI in Singapore exceeds <input class="input-small" type="number" name="psilimit" min="1" value="{{ curr_psi_limit }}"> for <input class="input-small" type="number" name="daylimit" min="1" max="{{ max_limit }}" value="{{ curr_day_limit }}"> consecutive days.</p>
+    {% else %}
+    <p> Send me an email reminder of my pledge each time the PSI in Singapore exceeds <input class=" input-small" type="number" name="psilimit" min="1"> for <input class="input-small" type="number" name="daylimit" min="1" max="{{ max_limit }}"> consecutive days.</p>
+    {% endif %}
+        </fieldset>
+    </form></p>
         </div>
         <div class="col-md-4">
           <h2 align="center">Estimated waiting time (in minutes):</h2>

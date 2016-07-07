@@ -49,21 +49,17 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
-        {% if user_nickname %}
-         <div class="span4 offset8 signin-align">
-            <span> {{ user_nickname }} <a href="{{ logout }}">logout</a></span>
-        </div>  
-          {% else %}
-        <div class="span3 offset9 signin-align">
-            <span> <font size="3" color="white">Login with(for stallholders):</font> <a href="/thedrunkards"><img src="../images/google.png"></a></span>
-        </div>
-        {% endif %}
-          {% if user_nickname %}
-          <li><a href="/stall1_page">Ayam Penyet</a></li>
-          <li><a href="/stall2_page">Salad Bar</a></li>
-          <li><a href="/stall3_page">Huang's</a></li>
-          {% endif %}
-    </div>
+            {% if user_nickname %}
+              <div style="position:relative;left:400px"><font color="white"> {{ user_nickname }} </font><a class="btn btn-primary btn-lg" role="button" href="{{ logout }}">logout</a>
+                <li><a href="/stall1_page">Ayam Penyet</a></li>
+                <li><a href="/stall2_page">Salad Bar</a></li>
+                <li><a href="/stall3_page">Huang's</a></li>
+                </div>  
+            {% else %}
+             <div><a class="btn btn-primary btn-lg" href="thedrunkards" role="button" style="position:relative;left:400px;top:8px">Login for stallholders</a>
+             </div>
+           {% endif %}
+         </div>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
