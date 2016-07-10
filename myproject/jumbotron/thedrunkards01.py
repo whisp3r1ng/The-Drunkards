@@ -3,6 +3,7 @@ import webapp2
 import jinja2
 import os
 import datetime ##NEW
+import cgi ## NEW
 
 from google.appengine.ext import ndb
 from google.appengine.api import users
@@ -19,6 +20,7 @@ psi_query = ndb.Query()
 class Preference(ndb.Model):
     # Models a person's preference. Key is the nickname.
     email = ndb.StringProperty() # user email
+    text_details = ndb.TextProperty() ## NEW
     psi_limit = ndb.IntegerProperty()  # max acceptable PSI
     day_limit = ndb.IntegerProperty()  # max day above acceptable PSI before reminder
     last_reminder = ndb.DateProperty() # the last time reminder was sent
@@ -66,6 +68,7 @@ class stall1(webapp2.RequestHandler): #Handler for the stores
                     'curr_psi_limit': person.psi_limit,
                     'curr_day_limit': person.day_limit,
                     'max_limit': max_days,
+                    'text': person.text_details,## NEW
                     }
 
                 template = jinja_environment.get_template('stall1.html')
@@ -76,6 +79,7 @@ class stall1(webapp2.RequestHandler): #Handler for the stores
             template_values = {
                     'curr_psi_limit': person.psi_limit,
                     'curr_day_limit': person.day_limit,
+                    'text': person.text_details,## NEW
                     'max_limit': max_days,
                     }
             template = jinja_environment.get_template('stall1.html')
@@ -107,6 +111,7 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
                     'curr_psi_limit': person.psi_limit,
                     'curr_day_limit': person.day_limit,
                     'max_limit': max_days,
+                    'text': person.text_details,## NEW
                     }
 
                 template = jinja_environment.get_template('stall1_page.html')
@@ -136,11 +141,13 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
             person.email = users.get_current_user().email()
         psi_limit = self.request.get_range('psilimit')
         day_limit = self.request.get_range('daylimit')
+        text_details = self.request.get('firstname') ## NEW
         singapore_time = datetime.datetime.utcnow() + datetime.timedelta(hours=8)
         person.last_reminder = singapore_time.date()
-        if (psi_limit > 0) and (day_limit > 0) and (day_limit <= max_days):
+        if len(text_details) >0: #(psi_limit > 0) and (day_limit > 0) and (day_limit <= max_days):
             person.psi_limit = psi_limit
             person.day_limit = day_limit
+            person.text_details = text_details
             person.put()
 
         template_values = {
@@ -149,6 +156,7 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
             'curr_psi_limit': person.psi_limit,
             'curr_day_limit': person.day_limit,
             'max_limit': max_days,
+            'text': person.text_details,## 
             }
 
         template = jinja_environment.get_template('stall1_page.html')

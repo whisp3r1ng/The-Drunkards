@@ -98,12 +98,18 @@
        </div>
         <div class="col-md-4">
           <h2 align="center">Special offers:</h2>
-          <form action="action_page.php">
-            <p align="center">Item to add:<br></p>
-            <p align="center"><input type="text" name="firstname" value="Mickey"><br></p>
-            <p align="center">Item to remove:<br></p>
-            <p align="center"><input type="text" name="lastname" value="Mouse"><br><br></p>
-            <p align="center"><input type="submit" value="Submit"></p>
+          <form action="/stall1_page" method="post">
+            <fieldset>
+            {% if text %}
+              Offers:<br>
+              <input type="text" name="firstname" value="{{ text }}"><br>
+              <p><input type="submit" value="Edit"></p>
+            {% else %}
+              Offers:<br>
+              <input type="text" name="firstname" value="{{ text }}"><br>
+              <p><input type="submit" value="Submit"></p>
+            {% endif %}
+            </fieldset>
           </form>
           <p>(WE NEED TO CREATE A FORM SUBMISSION HERE)</p>
         </div>
