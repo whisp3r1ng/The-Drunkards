@@ -51,7 +51,7 @@
           <form class="navbar-form navbar-right">
             {% if user_nickname %}
               <div style="position:relative;left:400px"><font color="white"> {{ user_nickname }} </font><a class="btn btn-primary btn-lg" role="button" href="{{ logout }}">logout</a>
-                <li><a href="/stall1_page">Ayam Penyet</a></li>
+                <li><a href="/stall1_page"><form action="/" method="get">{{ stall_name }}</form></a></li>
                 <li><a href="/stall2_page">Salad Bar</a></li>
                 <li><a href="/stall3_page">Huang's</a></li>
                 </div>  
@@ -86,7 +86,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2 align="center">Ayam Penyet</h2>
+          <h2 align="center"><form action="/" method="get">{{ stall_name }}</form></h2>
           <p>Operating hours (term time): Mon – Fri: 0730 – 1600 (several stalls operate till 8pm), Sat: 0730 – 1500 </p>
           <p><a class="btn btn-default" href="stall1" role="button">View details &raquo;</a></p>
         </div>
