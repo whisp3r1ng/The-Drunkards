@@ -75,7 +75,24 @@
         <p align="left"> Edit Header Here: </p>
         <p align="left">(WE NEED TO CREATE A FORM SUBMISSION HERE) This is a web application for NUS Orbital 2016 Project Gemini.</p>
         <p align="left"> Edit Menu Here: </p>
-        <p align="left">Menu: Dory Penyet $3.50, Ayam Penyet $4.00.</p>
+        <p align="left">
+          <form action="/stall1_page" method="post">
+          <fieldset>
+            Description: <input type="text" name="description">
+            <br>
+            Price: <input type="text" name="price">
+            <br>
+            Preparation Time: <input type="text" name="time">
+            <br>
+            <input type="submit" name="menu_update" value="add">
+          </fieldset>
+          </form>
+
+          <form action="/stall1_page" method="post">
+          <input type="text" value="{{ food_description }}">:<input type="text" value="{{ food_price }}">
+          <input type="submit" name="menu_delete" value="delete">
+          </form>
+        </p>
       </div>
     </div>
 
@@ -84,11 +101,14 @@
       <div class="row">
         <div class="col-md-4">
           <h2 align="center">Items in queue:</h2>
-          <p>(WE NEED TO CREATE A FORM SUBMISSION HERE)</p>
+          <p><form action="/stall1_page" method="post">
+          <input type="text" name="description" value="{{ food_description }}">
+          <input type="submit" value="add"></p>
+          </form>
         </div>
         <div class="col-md-4">
           <h2 align="center">Estimated waiting time (in minutes):</h2>
-          <p><form action="stall1_page" method="post">
+          <p><form action="/stall1_page" method="post">
           <input type="text" name="time" value="{{ stall_time }}">
           </form>
           </p>
