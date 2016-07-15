@@ -20,6 +20,13 @@ class Stall(ndb.Model):
     owner = ndb.StringProperty()
     menu = ndb.TextProperty()
     time = ndb.StringProperty()
+    description = ndb.StringProperty()
+    price = ndb.StringProperty()
+
+class Food(Stall):
+    time_taken = ndb.IntegerProperty()
+    description = ndb.StringProperty()
+    
 
 class MainPage(webapp2.RequestHandler): #Handler for the main page
     def get(self):
@@ -65,7 +72,9 @@ class stall1(webapp2.RequestHandler): #Handler for the stores
                     'logout': users.create_logout_url(self.request.host_url),
                     'stall_name': person.name,
                     'stall_menu': person.menu,
-                    'stall_time': person.time
+                    'stall_time': person.time,
+                    'food_description': person.description,
+                    'food_price': person.price
                     }
                 template = jinja_environment.get_template('stall1.html')
                 self.response.out.write(template.render(template_values))
@@ -74,7 +83,9 @@ class stall1(webapp2.RequestHandler): #Handler for the stores
             person = curr.get()
             template_values = {'stall_name': person.name,
                                'stall_menu': person.menu,
-                               'stall_time': person.time}
+                               'stall_time': person.time,
+                               'food_description': person.description,
+                               'food_price': person.price}
             template = jinja_environment.get_template('stall1.html')
             self.response.out.write(template.render(template_values))
 
@@ -97,7 +108,9 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
                     'logout': users.create_logout_url(self.request.host_url),
                     'stall_name': person.name,
                     'stall_menu': person.menu,
-                    'stall_time': person.time
+                    'stall_time': person.time,
+                    'food_description': person.description,
+                    'food_price': person.price
                     }
                 template = jinja_environment.get_template('stall1_page.html')
                 self.response.out.write(template.render(template_values))
@@ -110,30 +123,41 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
         if person == None:
             person = Stall(id=users.get_current_user().nickname())
             person.email = users.get_current_user().email()
-        button1 = self.request.get('name')
-        button2 = self.request.get('menu')
-        button3 = self.request.get('time')
-        if button1:
-            person.name = button1
-            person.time = person.time
-            person.menu = person.menu
+        stall_name = self.request.get('name')
+        stall_menu = self.request.get('menu')
+        prep_time = self.request.get('time')
+        food_descript = self.request.get('description')
+        food_price = self.request.get('price')
+        menu_update = self.request.get('menu_update')
+        menu_delete = self.request.get('menu_delete')
+
+        if stall_name:
+            person.name = stall_name
             person.put()
-        elif button2:
-            person.menu = button2
+            
+        elif menu_update: #if i click on the button add
+            person.description = food_descript
+            person.price = food_price
+            person.time = prep_time
             person.name = person.name
-            person.time = person.time
             person.put()
-        elif button3:
-            person.time = button3
+            
+        elif menu_delete:
             person.name = person.name
-            person.time = person.time
+            person.description = ""
+            person.price = ""
+            person.time = ""
             person.put()
+            
+
         template_values = {
                 'user_nickname': users.get_current_user().nickname(),
                 'logout': users.create_logout_url(self.request.host_url),
                 'stall_menu': person.menu,
                 'stall_name': person.name,
-                'stall_time': person.time}
+                'stall_time': person.time,
+                'food_description': person.description,
+                'food_price': person.price}
         template = jinja_environment.get_template('stall1_page.html')
         self.response.out.write(template.render(template_values))
         
