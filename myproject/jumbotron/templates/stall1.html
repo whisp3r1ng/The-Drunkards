@@ -53,7 +53,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 align="center">Ayam Penyet</h1>
+        <h1 align="center"><form action="/stall1" method="get">{{ stall_name }}</form></h1>
         <p align="left">This is a web application for NUS Orbital 2016 Project Gemini.</p>
         <p align="left"> Menu: Dory Penyet $3.50, Ayam Penyet $4.00.</p>
       </div>
@@ -64,15 +64,6 @@
       <div class="row">
         <div class="col-md-4">
           <h2 align="center">Items in queue:</h2>
-          <p><form action="/" method="get">
-        <fieldset>
-    {% if curr_psi_limit %}
-          <p> Send me an email reminder of my pledge each time the PSI in Singapore exceeds <input class="input-small" type="text" name="psilimit" min="1" value="{{ curr_psi_limit }}" > for <input class="input-small" type="number" name="daylimit" min="1" max="{{ max_limit }}" value="{{ curr_day_limit }}"> consecutive days.</p>
-    {% else %}
-    <p> Send me an email reminder of my pledge each time the PSI in Singapore exceeds <input class=" input-small" type="number" name="psilimit" min="1"> for <input class="input-small" type="number" name="daylimit" min="1" max="{{ max_limit }}"> consecutive days.</p>
-    {% endif %}
-        </fieldset>
-    </form></p>
         </div>
         <div class="col-md-4">
           <h2 align="center">Estimated waiting time (in minutes):</h2>
@@ -80,17 +71,6 @@
        </div>
         <div class="col-md-4">
           <h2 align="center">Special offers:</h2>
-          <form action="/" method="get">
-            <fieldset>
-            {% if text %}
-              Offers:<br>
-              <input type="text" name="firstname" value="{{ text }}"><br>
-            {% else %}
-              Offers:<br>
-              <input type="text" name="firstname" value="{{ text }}"><br>
-            {% endif %}
-            </fieldset>
-          </form>
           <p>-</p>
         </div>
       </div>
