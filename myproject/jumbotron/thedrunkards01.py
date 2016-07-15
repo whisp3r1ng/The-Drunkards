@@ -19,6 +19,7 @@ class Stall(ndb.Model):
     name = ndb.StringProperty()
     owner = ndb.StringProperty()
     menu = ndb.TextProperty()
+    time = ndb.StringProperty()
 
 class MainPage(webapp2.RequestHandler): #Handler for the main page
     def get(self):
@@ -62,14 +63,18 @@ class stall1(webapp2.RequestHandler): #Handler for the stores
                 template_values = {
                     'user_nickname': users.get_current_user().nickname(),
                     'logout': users.create_logout_url(self.request.host_url),
-                    'stall_name': person.name
+                    'stall_name': person.name,
+                    'stall_menu': person.menu,
+                    'stall_time': person.time
                     }
                 template = jinja_environment.get_template('stall1.html')
                 self.response.out.write(template.render(template_values))
         else:
             curr = ndb.Key('Stall', 'test@example.com')
             person = curr.get()
-            template_values = {'stall_name': person.name}
+            template_values = {'stall_name': person.name,
+                               'stall_menu': person.menu,
+                               'stall_time': person.time}
             template = jinja_environment.get_template('stall1.html')
             self.response.out.write(template.render(template_values))
 
@@ -90,7 +95,9 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
                 template_values = {
                     'user_nickname': users.get_current_user().nickname(),
                     'logout': users.create_logout_url(self.request.host_url),
-                    'stall_name': person.name
+                    'stall_name': person.name,
+                    'stall_menu': person.menu,
+                    'stall_time': person.time
                     }
                 template = jinja_environment.get_template('stall1_page.html')
                 self.response.out.write(template.render(template_values))
@@ -103,13 +110,30 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
         if person == None:
             person = Stall(id=users.get_current_user().nickname())
             person.email = users.get_current_user().email()
-        person.name = self.request.get('name')
-        person.put()
+        button1 = self.request.get('name')
+        button2 = self.request.get('menu')
+        button3 = self.request.get('time')
+        if button1:
+            person.name = button1
+            person.time = person.time
+            person.menu = person.menu
+            person.put()
+        elif button2:
+            person.menu = button2
+            person.name = person.name
+            person.time = person.time
+            person.put()
+        elif button3:
+            person.time = button3
+            person.name = person.name
+            person.time = person.time
+            person.put()
         template_values = {
                 'user_nickname': users.get_current_user().nickname(),
                 'logout': users.create_logout_url(self.request.host_url),
-                'stall_name': person.name
-                }
+                'stall_menu': person.menu,
+                'stall_name': person.name,
+                'stall_time': person.time}
         template = jinja_environment.get_template('stall1_page.html')
         self.response.out.write(template.render(template_values))
         

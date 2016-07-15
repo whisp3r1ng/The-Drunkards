@@ -66,10 +66,12 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <p align="center"><form action="/stall1_page" method="post"> Stall name:
-        <input name="name">
-        <input type="submit" value="edit">
+        <p align="right">
+        <form action="/stall1_page" method="post"> Stall name:
+          <input type="text" name="name" value="{{ stall_name }}">
+          <input type="submit" value="edit">
         </form></p>
+        <br>
         <p align="left"> Edit Header Here: </p>
         <p align="left">(WE NEED TO CREATE A FORM SUBMISSION HERE) This is a web application for NUS Orbital 2016 Project Gemini.</p>
         <p align="left"> Edit Menu Here: </p>
@@ -86,11 +88,18 @@
         </div>
         <div class="col-md-4">
           <h2 align="center">Estimated waiting time (in minutes):</h2>
-          <p>WE NEED TO AUTO GENERATE TIMINGS HERE</p>
+          <p><form action="stall1_page" method="post">
+          <input type="text" name="time" value="{{ stall_time }}">
+          </form>
+          </p>
        </div>
         <div class="col-md-4">
           <h2 align="center">Special offers:</h2>
-          <p>(WE NEED TO CREATE A FORM SUBMISSION HERE)</p>
+          <p><form action="/stall1_page" method="post">
+          <input type="text" name="menu" value="{{ stall_menu }}">
+          <input type="submit" value="submit">
+          </form>
+          </p>
         </div>
       </div>
 
