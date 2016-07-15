@@ -55,7 +55,8 @@
       <div class="container">
         <h1 align="center"><form action="/stall1" method="get">{{ stall_name }}</form></h1>
         <p align="left">This is a web application for NUS Orbital 2016 Project Gemini.</p>
-        <p align="left"> Menu: Dory Penyet $3.50, Ayam Penyet $4.00.</p>
+        <p align="left"> Menu:
+        <form action="/stall1" method="get"> {{ food_description }}: {{ food_price }} </form></p>
       </div>
     </div>
 
@@ -67,7 +68,6 @@
         </div>
         <div class="col-md-4">
           <h2 align="center">Estimated waiting time (in minutes):</h2>
-          <p><form action="/stall1" method="get">{{ stall_time }}</form></p>
        </div>
         <div class="col-md-4">
           <h2 align="center">Special offers:</h2>
