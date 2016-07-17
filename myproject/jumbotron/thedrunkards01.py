@@ -26,6 +26,7 @@ class Stall(ndb.Model):
 class Food(Stall):
     time_taken = ndb.IntegerProperty()
     description = ndb.StringProperty()
+    user = None
     
 
 class MainPage(webapp2.RequestHandler): #Handler for the main page
@@ -34,6 +35,7 @@ class MainPage(webapp2.RequestHandler): #Handler for the main page
         if user:  # signed in already
             curr = ndb.Key('Stall', users.get_current_user().nickname())
             person = curr.get()
+            Food.user = person
             template_values = {
                 'user_nickname': users.get_current_user().nickname(),
                 'logout': users.create_logout_url(self.request.host_url),
@@ -41,11 +43,16 @@ class MainPage(webapp2.RequestHandler): #Handler for the main page
             template = jinja_environment.get_template('index.html')
             self.response.out.write(template.render(template_values))
         else:
-            curr = ndb.Key('Stall', 'test@example.com')
-            person = curr.get()
+#            curr = ndb.Key('Stall', 'khoongweihao@gmail.com')
+#            person = curr.get()
+            person1 = Food.user
+            if person1 == None:
+                person1 = Stall(id='khoongweihao@gmail.com')
             template_values = {
-                'stall_name': person.name}
+                'stall_name': person1.name,
+                }
             template = jinja_environment.get_template('index.html')
+#            self.response.out.write(template.render())
             self.response.out.write(template.render(template_values))
 
 class About(webapp2.RequestHandler): #Handler for the about page
