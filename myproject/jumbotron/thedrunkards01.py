@@ -45,11 +45,11 @@ class MainPage(webapp2.RequestHandler): #Handler for the main page
         else:
 #            curr = ndb.Key('Stall', 'khoongweihao@gmail.com')
 #            person = curr.get()
-            person1 = Food.user
-            if person1 == None:
-                person1 = Stall(id='khoongweihao@gmail.com')
+            person = Food.user
+            if person == None:
+                person = Stall(id='khoongweihao@gmail.com')
             template_values = {
-                'stall_name': person1.name,
+                'stall_name': person.name,
                 }
             template = jinja_environment.get_template('index.html')
 #            self.response.out.write(template.render())
@@ -86,8 +86,11 @@ class stall1(webapp2.RequestHandler): #Handler for the stores
                 template = jinja_environment.get_template('stall1.html')
                 self.response.out.write(template.render(template_values))
         else:
-            curr = ndb.Key('Stall', 'test@example.com')
-            person = curr.get()
+#            curr = ndb.Key('Stall', 'test@example.com')
+#            person = curr.get()
+            person = Food.user
+            if person == None:
+                person = Stall(id='khoongweihao@gmail.com')
             template_values = {'stall_name': person.name,
                                'stall_menu': person.menu,
                                'stall_time': person.time,
