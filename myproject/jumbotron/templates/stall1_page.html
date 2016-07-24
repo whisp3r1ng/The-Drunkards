@@ -67,9 +67,9 @@
     <div class="jumbotron">
       <div class="container">
         <p align="right">
-        <form action="/stall1_page" method="post"> Stall name:
+        <form action="/stall1_page" method="post"> <p align="right"> Stall name:
           <input type="text" name="name" value="{{ stall_name }}">
-          <input type="submit" value="edit">
+          <input type="submit" value="edit"></p>
         </form></p>
         <br>
         <p align="left"> Edit Header Here: </p>
@@ -78,19 +78,19 @@
         <p align="left">
           <form action="/stall1_page" method="post">
           <fieldset>
-            Description: <input type="text" name="description">
+             <p align="right">Description: <input type="text" name="description"></p>
             <br>
-            Price: <input type="text" name="price">
+             <p align="right">Price: <input type="text" name="price"></p>
             <br>
-            Preparation Time: <input type="text" name="time">
+             <p align="right">Preparation Time: <input type="text" name="prep_time"></p>
             <br>
-            <input type="submit" name="menu_update" value="add">
+             <p align="right"><input type="submit" name="menu_update" value="add"></p>
           </fieldset>
           </form>
 
           <form action="/stall1_page" method="post">
-          <input type="text" value="{{ food_description }}">:<input type="text" value="{{ food_price }}">
-          <input type="submit" name="menu_delete" value="delete">
+           <p align="right"><input type="text" value="{{ food_description }}"></p>
+           <p align="right"><input type="submit" name="menu_delete" value="delete"></p>
           </form>
         </p>
       </div>
@@ -102,22 +102,22 @@
         <div class="col-md-4">
           <h2 align="center">Items in queue:</h2>
           <p><form action="/stall1_page" method="post">
-          <input type="text" name="description" value="{{ food_description }}">
-          <input type="submit" value="add"></p>
+           <p align="right"><input type="text" name="item_add" value="{{ item_add }}"></p>
+           <p align="right"><input type="submit" value="add"></p>
           </form>
         </div>
         <div class="col-md-4">
           <h2 align="center">Estimated waiting time (in minutes):</h2>
-          <p><form action="/stall1_page" method="post">
-          <input type="text" name="time" value="{{ stall_time }}">
+          <p><form action="/stall1_page" method="get">
+           <p align="right"><input type="text" name="waiting_time" value="{{ waiting_time }}"></p>
           </form>
           </p>
        </div>
         <div class="col-md-4">
           <h2 align="center">Special offers:</h2>
           <p><form action="/stall1_page" method="post">
-          <input type="text" name="menu" value="{{ stall_menu }}">
-          <input type="submit" value="submit">
+           <p align="right"><input type="text" name="menu" value="{{ stall_menu }}"></p>
+           <p align="right"><input type="submit" value="submit"></p>
           </form>
           </p>
         </div>

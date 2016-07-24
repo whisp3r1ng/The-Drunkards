@@ -56,7 +56,7 @@
         <h1 align="center"><form action="/stall1" method="get">{{ stall_name }}</form></h1>
         <p align="left">This is a web application for NUS Orbital 2016 Project Gemini.</p>
         <p align="left"> Menu:
-        <form action="/stall1" method="get"> {{ food_description }}: {{ food_price }} </form></p>
+        <form action="/stall1" method="get"> <p align="right">{{ food_description }}</p> </form></p>
       </div>
     </div>
 
@@ -65,13 +65,19 @@
       <div class="row">
         <div class="col-md-4">
           <h2 align="center">Items in queue:</h2>
+          <p><form action="/stall1_page" method="get">
+           <p align="right"><input type="text" name="description" value="{{ item_add }}"></p>
+           </form>
         </div>
         <div class="col-md-4">
           <h2 align="center">Estimated waiting time (in minutes):</h2>
+          <p><form action="/stall1_page" method="get">
+           <p align="right"><input type="text" name="time" value="{{ waiting_time }}"></p>
+          </form>
        </div>
         <div class="col-md-4">
           <h2 align="center">Special offers:</h2>
-          <p><form action="/stall1" method="get">{{ stall_menu }}</form></p>
+          <p><form action="/stall1" method="get"> <p align="right">{{ stall_menu }}</p></form></p>
         </div>
       </div>
 
