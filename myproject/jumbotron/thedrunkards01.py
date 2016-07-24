@@ -19,7 +19,7 @@ class Stall(ndb.Model):
     name = ndb.StringProperty()
     owner = ndb.StringProperty()
     menu = ndb.TextProperty()
-    time = ndb.StringProperty()##
+    time = ndb.IntegerProperty()
     description = ndb.StringProperty()
     price = ndb.StringProperty()
     item = {} ##
@@ -45,13 +45,15 @@ class MainPage(webapp2.RequestHandler): #Handler for the main page
             template = jinja_environment.get_template('index.html')
             self.response.out.write(template.render(template_values))
         else:
-#            curr = ndb.Key('Stall', 'khoongweihao')
-            curr = ndb.Key('Stall', 'test@example.com')
+            curr = ndb.Key('Stall', 'khoongweihao')
             person = curr.get()
-            template_values = {'stall_name': person.name,}
+            if person == None:
+                person = Stall(id='khoongweihao')
+            template_values = {'stall_name': person.name,
+                               }
             template = jinja_environment.get_template('index.html')
             self.response.out.write(template.render(template_values))
-#            self.response.out.write(template.render())
+            self.response.out.write(template.render())
 
 class About(webapp2.RequestHandler): #Handler for the about page
     def get(self):
@@ -84,8 +86,7 @@ class stall1(webapp2.RequestHandler): #Handler for the stores
                 template = jinja_environment.get_template('stall1.html')
                 self.response.out.write(template.render(template_values))
         else:
-#            curr = ndb.Key('Stall', 'khoongweihao')
-            curr = ndb.Key('Stall', 'test@example.com')
+            curr = ndb.Key('Stall', 'khoongweihao')
             person = curr.get()
             template_values = {'stall_name': person.name,
                                'stall_menu': person.menu,
@@ -147,21 +148,13 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
             person.put()
             
         elif menu_update: #if i click on the button add
-            if person.description == "" or person.description == None:
+            if person.description == "":
                 person.description = ""
-                if type(food_price) != str: ##
-                    person.description += food_descript + " : " + str(food_price)
-                    person.item[food_descript] = prep_time ##
-                else:
-                    person.description += food_descript + " : " + food_price
-                    person.item[food_descript] = prep_time ##
+                person.description += food_descript + " : " + food_price
+                person.item[food_descript] = prep_time ##
             else:
-                if type(food_price) != str: ##
-                    person.description += " ," + food_descript + " : " + str(food_price) ##
-                    person.item[food_descript] = prep_time ##
-                else:
-                    person.description += " ," + food_descript + " : " + food_price ##
-                    person.item[food_descript] = prep_time ##
+                person.description += " ," + food_descript + " : " + food_price ##
+                person.item[food_descript] = prep_time ##
             person.price = food_price
             person.time = prep_time
             person.name = person.name
