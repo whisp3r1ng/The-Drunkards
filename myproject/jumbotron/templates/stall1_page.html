@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="../favicon.ico">
 
     <title>The Drunkards</title>
 
@@ -82,16 +82,18 @@
             <br>
              <p align="right">Price: <input type="text" name="price"></p>
             <br>
-             <p align="right">Preparation Time: <input type="text" name="prep_time"></p>
+             <p align="right">Preparation Time: <input type="text" name="time"></p>
             <br>
              <p align="right"><input type="submit" name="menu_update" value="add"></p>
           </fieldset>
           </form>
 
+        <p align="right"> Delete Menu:
           <form action="/stall1_page" method="post">
-           <p align="right"><input type="text" value="{{ food_description }}"></p>
+           <p align="right"><input type="text" value="{{ food_info }}"></p>
            <p align="right"><input type="submit" name="menu_delete" value="delete"></p>
           </form>
+        </p>
         </p>
       </div>
     </div>
@@ -102,8 +104,9 @@
         <div class="col-md-4">
           <h2 align="center">Items in queue:</h2>
           <p><form action="/stall1_page" method="post">
-           <p align="right"><input type="text" name="item_add" value="{{ item_add }}"></p>
-           <p align="right"><input type="submit" value="add"></p>
+           <p align="right"><input type="text" name="item_add"></p>
+           <p align="right"><input type="submit" name="item_add" value="add"></p>
+           <p align="right"><input type="submit" name="queue_delete" value="delete">
           </form>
         </div>
         <div class="col-md-4">
@@ -135,9 +138,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
