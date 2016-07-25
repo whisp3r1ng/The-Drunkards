@@ -23,8 +23,8 @@ class Stall(ndb.Model):
     price = ndb.StringProperty()
     item = {} ##
     waiting_time = ndb.IntegerProperty() ##
-    food_info = ndb.StringProperty()
-    item_add = ndb.StringProperty()
+    food_info = []
+    item_add = []
 
 
 class MainPage(webapp2.RequestHandler): #Handler for the main page
@@ -141,47 +141,39 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
         item_add = self.request.get('item_add') ## NEW
         waiting_time = self.request.get('waiting_time') ## NEW
         queue_delete = self.request.get('queue_delete')
+        items = self.request.get('items')
 
         if stall_name:
             person.name = stall_name
             person.put()
             
         elif menu_update: #if i click on the button add
-            if person.food_info == "" or person.food_info == None:
-                if type(food_price) != str: ##
-                    person.food_info = food_descript + ": " + str(food_price)
-                    person.item[food_descript] = int(prep_time) ##
-                else:
-                    person.food_info = food_descript + ": " + food_price
-                    person.item[food_descript] = int(prep_time) ##
-            else:
-                if type(food_price) != str: ##
-                    person.food_info += ", " + food_descript + ": " + str(food_price) ##
-                    person.item[food_descript] = int(prep_time) ##
-                else:
-                    person.food_info += ", " + food_descript + ": " + food_price ##
-                    person.item[food_descript] = int(prep_time) ##
+            if food_descript not in person.item:
+                person.item = dict(descript=food_descript, price=food_price, time=prep_time)
+                person.food_info.append(person.item)
             person.put()
 
         elif item_add: ##
-            if item_add in person.item: # if item added is in item dictionary
-                if person.waiting_time == None or person.waiting_time == 0:
-                    person.waiting_time = int(0)
-                person.waiting_time += person.item[item_add] # add value of key to waiting time
-                person.item_add += ", " + str(item_add)
+            for item in person.food_info:
+                if item_add == item["descript"]: # if item added is in item dictionary
+                    person.item_add.append(item_add)
+                    person.waiting_time += int(item["time"])
                 person.put()
             else:
                 person.waiting_time = person.waiting_time
             person.put()
 
         elif queue_delete:
-            person.item_add = ""
+            for i in range(len(person.item_add)):
+                person.item_add.pop()
             person.waiting_time = 0
             person.put()
             
             
         elif menu_delete:
-            person.food_info = ""
+            for item in person.food_info:
+                if items == item["descript"]:
+                    person.food_info.remove(item)
             person.put()
             
 
