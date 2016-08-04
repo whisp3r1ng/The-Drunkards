@@ -52,8 +52,8 @@
             {% if user_nickname %}
               <div style="position:relative;left:400px"><font color="white"> {{ user_nickname }} </font><a class="btn btn-primary btn-lg" role="button" href="{{ logout }}">logout</a>
                 <li><a href="/stall1_page"><form action="/" method="get">{{ stall_name }}</form></a></li>
-                <li><a href="/stall2_page">Salad Bar</a></li>
-                <li><a href="/stall3_page">Huang's</a></li>
+                <li><a href="/stall2_page"><form action="/" method="get">{{ stall_name2 }}</form></a></li>
+                <li><a href="/stall3_page"><form action="/" method="get">{{ stall_name3 }}</form></a></li>
                 </div>  
             {% else %}
              <div><a class="btn btn-primary btn-lg" href="thedrunkards" role="button" style="position:relative;left:400px;top:8px">Login for stallholders</a>
@@ -91,12 +91,12 @@
           <p><a class="btn btn-default" href="stall1" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
-          <h2 align="center">Salad Bar</h2>
+          <h2 align="center"><form action="/" method="get">{{ stall_name2 }}</form></h2>
           <p>Operating hours: Mon to Fri: 0730 - 1600 Sat: 0730 - 1500 Closed on Sun. Contact: 6872 5845</p>
           <p><a class="btn btn-default" href="stall2" role="button">View details &raquo;</a></p>
        </div>
         <div class="col-md-4">
-          <h2 align="center">Huang's</h2>
+          <h2 align="center"><form action="/" method="get">{{ stall_name3 }}</form></h2>
           <p>Operating hours: Mon to Fri: 0800 - 1800</p>
           <p><a class="btn btn-default" href="stall3" role="button">View details &raquo;</a></p>
         </div>

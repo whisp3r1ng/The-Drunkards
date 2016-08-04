@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="../favicon.ico">
 
     <title>The Drunkards</title>
 
@@ -51,7 +51,7 @@
           <form class="navbar-form navbar-right">
             {% if user_nickname %}
               <div style="position:relative;left:400px"><font color="white"> {{ user_nickname }} </font><a class="btn btn-primary btn-lg" role="button" href="{{ logout }}">logout</a>
-                <li><a href="/stall2_page">Salad Bar</a></li>
+                <li><a href="/stall2_page"><form action="/stall2" method="get">{{ stall_name2 }}</form></a></li>
                 </div>  
             {% else %}
              <div><a class="btn btn-primary btn-lg" href="thedrunkards" role="button" style="position:relative;left:400px;top:8px">Login for stallholders</a>
@@ -66,11 +66,40 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 align="center">Salad Bar</h1>
+        <p align="right">
+        <form action="/stall2_page" method="post"> <p align="right"> Stall name:
+          <input type="text" name="name2" value="{{ stall_name2 }}">
+          <input type="submit" value="edit"></p>
+        </form></p>
+        <br>
         <p align="left"> Edit Header Here: </p>
-        <p align="left">(WE NEED TO CREATE A FORM SUBMISSION HERE) This is a web application for NUS Orbital 2016 Project Gemini.</p>
+        <p align="left">This is a web application for NUS Orbital 2016 Project Gemini.</p>
         <p align="left"> Edit Menu Here: </p>
-        <p align="left">(WE NEED TO CREATE A FORM SUBMISSION HERE) Menu: Ribeye Steak (Signature dish) $5.00, Chicken Chop $3.00, Fish & Chips $3.00.</p>
+        <p align="left">
+          <form action="/stall2_page" method="post">
+          <fieldset>
+             <p align="right">Description: <input type="text" name="description2"></p>
+            <br>
+             <p align="right">Price: <input type="text" name="price2"></p>
+            <br>
+             <p align="right">Preparation Time: <input type="text" name="time2"></p>
+            <br>
+             <p align="right"><input type="submit" name="menu_update2" value="add"></p>
+          </fieldset>
+          </form>
+
+        <p align="right"> Delete Menu:
+          <form action="/stall2_page" method="post">
+          {% for items2 in food_info2 %}
+           <p align="right">
+           {{ items2.descript2 }}: {{ items2.price2 }}
+           <input type="radio" name="items2" value="{{ items2.descript2 }}">
+           </p>
+           <p align="right"><input type="submit" name="menu_delete2" value="delete"></p>
+          {% endfor %}
+          </form>
+        </p>
+        </p>
       </div>
     </div>
 
@@ -79,15 +108,32 @@
       <div class="row">
         <div class="col-md-4">
           <h2 align="center">Items in queue:</h2>
-          <p>(WE NEED TO CREATE A FORM SUBMISSION HERE)</p>
+          <p><form action="/stall2_page" method="post">
+           <p align="right"><select name=item_add2>
+          {% for items2 in food_info2 %}
+           <option value="{{ items2.descript2 }}">{{ items2.descript2 }}
+          {% endfor %}      
+           </option></p>
+           </select>
+
+           <p align="right"><input type="submit" name="item_add2" value="add"></p>
+           <p align="right"><input type="submit" name="queue_delete2" value="delete">
+          </form>
         </div>
         <div class="col-md-4">
           <h2 align="center">Estimated waiting time (in minutes):</h2>
-          <p>WE NEED TO AUTO GENERATE TIMINGS HERE</p>
+          <p><form action="/stall2_page" method="get">
+           <p align="right"><input type="text" name="waiting_time2" value="{{ waiting_time2 }}"></p>
+          </form>
+          </p>
        </div>
         <div class="col-md-4">
           <h2 align="center">Special offers:</h2>
-          <p>(WE NEED TO CREATE A FORM SUBMISSION HERE)</p>
+          <p><form action="/stall2_page" method="post">
+           <p align="right"><input type="text" name="menu2" value="{{ stall_menu2 }}"></p>
+           <p align="right"><input type="submit" value="submit"></p>
+          </form>
+          </p>
         </div>
       </div>
 
@@ -103,9 +149,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

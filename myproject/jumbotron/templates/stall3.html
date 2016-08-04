@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="../favicon.ico">
 
     <title>The Drunkards</title>
 
@@ -53,9 +53,16 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 align="center">Huang's</h1>
+        <h1 align="center"><form action="/stall3" method="get">{{ stall_name3 }}</form></h1>
         <p align="left">This is a web application for NUS Orbital 2016 Project Gemini.</p>
-        <p align="left"> Menu: Kimchi Fried Rice $3.50, Chicken Bulgogi $4.00, Beef Bulgogi $4.50.</p>
+        <p align="left"> Menu:
+          <form action="/stall3" method="get">
+          {% for items3 in food_info3 %}
+           <p align="right">
+           {{ items3.descript3 }}: {{ items3.price3 }}
+           </p>
+          {% endfor %}
+          </form>
       </div>
     </div>
 
@@ -64,15 +71,21 @@
       <div class="row">
         <div class="col-md-4">
           <h2 align="center">Items in queue:</h2>
-          <p>- </p>
+          {% for items3 in item_add3 %}
+          <p><form action="/stall3" method="get">
+           <p align="right">{{ loop.index }}) {{ items3 }}</p>
+           </form>
+          {% endfor %}
         </div>
         <div class="col-md-4">
           <h2 align="center">Estimated waiting time (in minutes):</h2>
-          <p>0</p>
+          <p><form action="/stall3" method="get">
+           <p align="right">{{ waiting_time3 }}</p>
+          </form>
        </div>
         <div class="col-md-4">
           <h2 align="center">Special offers:</h2>
-          <p>-</p>
+          <p><form action="/stall3" method="get"> <p align="right">{{ stall_menu3 }}</p></form></p>
         </div>
       </div>
 
@@ -88,9 +101,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
