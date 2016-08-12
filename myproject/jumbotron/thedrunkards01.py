@@ -18,13 +18,14 @@ jinja_environment = jinja2.Environment(
 class Stall(ndb.Model):
     name = ndb.StringProperty() ## For Stall1
     menu = ndb.TextProperty()
-    time = ndb.StringProperty()
-    description = ndb.StringProperty()
-    price = ndb.StringProperty()
-    item = {} 
-    waiting_time = ndb.IntegerProperty() 
-    food_info = []
-    item_add = []
+    time = ndb.StringProperty() ## prep time
+    description = ndb.StringProperty() ## description of dish
+    price = ndb.StringProperty() ## cost of dish
+    item = {} ## dictionary to store time,description and price as 1
+    waiting_time = ndb.IntegerProperty() ## total waiting time
+    food_info = [] ## add different dishes into food_info
+    item_add = [] ## list of food in the queue, description only
+    
     name2 = ndb.StringProperty() ## For Stall2
     menu2 = ndb.TextProperty()
     time2 = ndb.StringProperty()
@@ -34,6 +35,7 @@ class Stall(ndb.Model):
     waiting_time2 = ndb.IntegerProperty() 
     food_info2 = []
     item_add2 = []
+    
     name3 = ndb.StringProperty() ## For Stall3
     menu3 = ndb.TextProperty()
     time3 = ndb.StringProperty()
@@ -167,6 +169,7 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
         waiting_time = self.request.get('waiting_time') ## NEW
         queue_delete = self.request.get('queue_delete')
         items = self.request.get('items')
+        item_in_queue = self.request.get('item_in_queue') ## name of field in .html
 
         if stall_name:
             person.name = stall_name
@@ -182,8 +185,8 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
             if person.waiting_time == None:
                 person.waiting_time = int(0)
             for item in person.food_info:
-                if item_add == item["descript"]: # if item added is in item dictionary
-                    person.item_add.append(item_add)
+                if item_in_queue == item["descript"]: # if item added is in item dictionary
+                    person.item_add.append(item_in_queue)
                     person.waiting_time += int(item["time"])
                 person.put()
             else:
@@ -191,9 +194,13 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
             person.put()
 
         elif queue_delete:
-            for i in range(len(person.item_add)):
-                person.item_add.pop()
-            person.waiting_time = 0
+            if person.item_add == []:
+                person.waiting_time = 0
+            else:
+                person.item_add.remove(item_in_queue)
+                for items in person.food_info:
+                    if items["descript"] == item_in_queue:
+                        person.waiting_time -= int(items["time"])
             person.put()
             
             
@@ -309,6 +316,7 @@ class stall2_page(webapp2.RequestHandler): #Handler for the stores
         waiting_time2 = self.request.get('waiting_time2') ## NEW
         queue_delete2 = self.request.get('queue_delete2')
         items2 = self.request.get('items2')
+        item_in_queue2 = self.request.get('item_in_queue2') ## name of field in .html
 
         if stall_name2:
             person.name2 = stall_name2
@@ -324,8 +332,8 @@ class stall2_page(webapp2.RequestHandler): #Handler for the stores
             if person.waiting_time2 == None:
                 person.waiting_time2 = int(0)
             for item2 in person.food_info2:
-                if item_add2 == item2["descript2"]: # if item added is in item dictionary
-                    person.item_add2.append(item_add2)
+                if item_in_queue2 == item2["descript2"]: # if item added is in item dictionary
+                    person.item_add2.append(item_in_queue2)
                     person.waiting_time2 += int(item2["time2"])
                 person.put()
             else:
@@ -333,9 +341,13 @@ class stall2_page(webapp2.RequestHandler): #Handler for the stores
             person.put()
 
         elif queue_delete2:
-            for i in range(len(person.item_add2)):
-                person.item_add2.pop()
-            person.waiting_time2 = 0
+            if person.item_add2 == []:
+                person.waiting_time2 = 0
+            else:
+                person.item_add2.remove(item_in_queue2)
+                for items2 in person.food_info2:
+                    if items2["descript2"] == item_in_queue2:
+                        person.waiting_time2 -= int(items2["time2"])
             person.put()
             
             
@@ -452,6 +464,7 @@ class stall3_page(webapp2.RequestHandler): #Handler for the stores
         waiting_time3 = self.request.get('waiting_time3') ## NEW
         queue_delete3 = self.request.get('queue_delete3')
         items3 = self.request.get('items3')
+        item_in_queue3 = self.request.get('item_in_queue3') ## name of field in .html
 
         if stall_name3:
             person.name3 = stall_name3
@@ -467,8 +480,8 @@ class stall3_page(webapp2.RequestHandler): #Handler for the stores
             if person.waiting_time3 == None:
                 person.waiting_time3 = int(0)
             for item3 in person.food_info3:
-                if item_add3 == item3["descript3"]: # if item added is in item dictionary
-                    person.item_add3.append(item_add3)
+                if item_in_queue3 == item3["descript3"]: # if item added is in item dictionary
+                    person.item_add3.append(item_in_queue3)
                     person.waiting_time3 += int(item3["time3"])
                 person.put()
             else:
@@ -476,9 +489,13 @@ class stall3_page(webapp2.RequestHandler): #Handler for the stores
             person.put()
 
         elif queue_delete3:
-            for i in range(len(person.item_add3)):
-                person.item_add3.pop()
-            person.waiting_time3 = 0
+            if person.item_add3 == []:
+                person.waiting_time3 = 0
+            else:
+                person.item_add3.remove(item_in_queue3)
+                for items3 in person.food_info3:
+                    if items3["descript3"] == item_in_queue3:
+                        person.waiting_time3 -= int(items3["time3"])
             person.put()
             
             

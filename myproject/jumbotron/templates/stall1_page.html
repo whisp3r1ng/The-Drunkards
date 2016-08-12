@@ -109,7 +109,7 @@
         <div class="col-md-4">
           <h2 align="center">Items in queue:</h2>
           <p><form action="/stall1_page" method="post">
-           <p align="right"><select name=item_add>
+           <p align="right"><select name=item_in_queue>
           {% for items in food_info %}
            <option value="{{ items.descript }}">{{ items.descript }}
           {% endfor %}      
