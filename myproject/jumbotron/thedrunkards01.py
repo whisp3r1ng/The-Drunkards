@@ -25,6 +25,7 @@ class Stall(ndb.Model):
     waiting_time = ndb.IntegerProperty() ## total waiting time
     food_info = [] ## add different dishes into food_info
     item_add = [] ## list of food in the queue, description only
+    offer = ndb.StringProperty() #Special offers
     
     name2 = ndb.StringProperty() ## For Stall2
     menu2 = ndb.TextProperty()
@@ -35,6 +36,7 @@ class Stall(ndb.Model):
     waiting_time2 = ndb.IntegerProperty() 
     food_info2 = []
     item_add2 = []
+    offer2 = ndb.StringProperty() #Special offers
     
     name3 = ndb.StringProperty() ## For Stall3
     menu3 = ndb.TextProperty()
@@ -45,6 +47,7 @@ class Stall(ndb.Model):
     waiting_time3 = ndb.IntegerProperty() 
     food_info3 = []
     item_add3 = []
+    offer3 = ndb.StringProperty() #Special offers
 
 
 class MainPage(webapp2.RequestHandler): #Handler for the main page
@@ -103,7 +106,8 @@ class stall1(webapp2.RequestHandler): #Handler for the stores
                     'food_price': person.price,
                     'food_info': person.food_info,
                     'item_add': person.item_add,
-                    'waiting_time': person.waiting_time
+                    'waiting_time': person.waiting_time,
+                    'special_offer': person.offer, ## new
                     }
                 template = jinja_environment.get_template('stall1.html')
                 self.response.out.write(template.render(template_values))
@@ -118,7 +122,9 @@ class stall1(webapp2.RequestHandler): #Handler for the stores
                     'food_price': person.price,
                     'food_info': person.food_info,
                     'item_add': person.item_add,
-                    'waiting_time': person.waiting_time}
+                    'waiting_time': person.waiting_time,
+                    'special_offer': person.offer ##new
+                               }
             template = jinja_environment.get_template('stall1.html')
             self.response.out.write(template.render(template_values))
 
@@ -146,7 +152,8 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
                     'food_price': person.price,
                     'waiting_time': person.waiting_time,
                     'food_info': person.food_info,
-                    'item_add': person.item_add
+                    'item_add': person.item_add,
+                    'special_offer': person.offer
                     }
                 template = jinja_environment.get_template('stall1_page.html')
                 self.response.out.write(template.render(template_values))
@@ -170,7 +177,8 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
         queue_delete = self.request.get('queue_delete')
         items = self.request.get('items')
         item_in_queue = self.request.get('item_in_queue') ## name of field in .html
-
+        special_offer = self.request.get('offer') ##new
+        
         if stall_name:
             person.name = stall_name
             person.put()
@@ -209,6 +217,13 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
                 if items == item["descript"]:
                     person.food_info.remove(item)
             person.put()
+
+        if special_offer:
+            if special_offer == None:
+                person.offer = "None"
+            else:
+                person.offer = special_offer
+            person.put()
             
 
         template_values = {
@@ -221,7 +236,8 @@ class stall1_page(webapp2.RequestHandler): #Handler for the stores
                 'food_price': person.price,
                 'waiting_time': person.waiting_time,
                 'food_info': person.food_info,
-                'item_add': person.item_add
+                'item_add': person.item_add,
+                'special_offer': person.offer
                 }
         template = jinja_environment.get_template('stall1_page.html')
         self.response.out.write(template.render(template_values))
@@ -250,7 +266,8 @@ class stall2(webapp2.RequestHandler): #Handler for the stores
                     'food_price2': person.price2,
                     'food_info2': person.food_info2,
                     'item_add2': person.item_add2,
-                    'waiting_time2': person.waiting_time2
+                    'waiting_time2': person.waiting_time2,
+                    'special_offer2': person.offer2, ## new
                     }
                 template = jinja_environment.get_template('stall2.html')
                 self.response.out.write(template.render(template_values))
@@ -265,7 +282,9 @@ class stall2(webapp2.RequestHandler): #Handler for the stores
                     'food_price2': person.price2,
                     'food_info2': person.food_info2,
                     'item_add2': person.item_add2,
-                    'waiting_time2': person.waiting_time2}
+                    'waiting_time2': person.waiting_time2,
+                    'special_offer2': person.offer2, ## new
+                               }
             template = jinja_environment.get_template('stall2.html')
             self.response.out.write(template.render(template_values))
 
@@ -293,7 +312,8 @@ class stall2_page(webapp2.RequestHandler): #Handler for the stores
                     'food_price2': person.price2,
                     'waiting_time2': person.waiting_time2,
                     'food_info2': person.food_info2,
-                    'item_add2': person.item_add2
+                    'item_add2': person.item_add2,
+                    'special_offer2': person.offer2, ## new
                     }
                 template = jinja_environment.get_template('stall2_page.html')
                 self.response.out.write(template.render(template_values))
@@ -317,6 +337,7 @@ class stall2_page(webapp2.RequestHandler): #Handler for the stores
         queue_delete2 = self.request.get('queue_delete2')
         items2 = self.request.get('items2')
         item_in_queue2 = self.request.get('item_in_queue2') ## name of field in .html
+        special_offer2 = self.request.get('offer2') ##new
 
         if stall_name2:
             person.name2 = stall_name2
@@ -356,6 +377,13 @@ class stall2_page(webapp2.RequestHandler): #Handler for the stores
                 if items2 == item2["descript2"]:
                     person.food_info2.remove(item2)
             person.put()
+
+        if special_offer2:
+            if special_offer2 == None:
+                person.offer2 = "None"
+            else:
+                person.offer2 = special_offer2
+            person.put()
             
 
         template_values = {
@@ -368,7 +396,8 @@ class stall2_page(webapp2.RequestHandler): #Handler for the stores
                 'food_price2': person.price2,
                 'waiting_time2': person.waiting_time2,
                 'food_info2': person.food_info2,
-                'item_add2': person.item_add2
+                'item_add2': person.item_add2,
+                'special_offer2': person.offer2, ## new
                 }
         template = jinja_environment.get_template('stall2_page.html')
         self.response.out.write(template.render(template_values))
@@ -397,7 +426,8 @@ class stall3(webapp2.RequestHandler): #Handler for the stores
                     'food_price3': person.price3,
                     'food_info3': person.food_info3,
                     'item_add3': person.item_add3,
-                    'waiting_time3': person.waiting_time3
+                    'waiting_time3': person.waiting_time3,
+                    'special_offer3': person.offer3, ## new
                     }
                 template = jinja_environment.get_template('stall3.html')
                 self.response.out.write(template.render(template_values))
@@ -412,7 +442,8 @@ class stall3(webapp2.RequestHandler): #Handler for the stores
                     'food_price3': person.price3,
                     'food_info3': person.food_info3,
                     'item_add3': person.item_add3,
-                    'waiting_time3': person.waiting_time3
+                    'waiting_time3': person.waiting_time3,
+                    'special_offer3': person.offer3, ## new
                                }
             template = jinja_environment.get_template('stall3.html')
             self.response.out.write(template.render(template_values))
@@ -441,7 +472,8 @@ class stall3_page(webapp2.RequestHandler): #Handler for the stores
                     'food_price3': person.price3,
                     'waiting_time3': person.waiting_time3,
                     'food_info3': person.food_info3,
-                    'item_add3': person.item_add3
+                    'item_add3': person.item_add3,
+                    'special_offer3': person.offer3, ## new
                     }
                 template = jinja_environment.get_template('stall3_page.html')
                 self.response.out.write(template.render(template_values))
@@ -465,6 +497,7 @@ class stall3_page(webapp2.RequestHandler): #Handler for the stores
         queue_delete3 = self.request.get('queue_delete3')
         items3 = self.request.get('items3')
         item_in_queue3 = self.request.get('item_in_queue3') ## name of field in .html
+        special_offer3 = self.request.get('offer3') ##new
 
         if stall_name3:
             person.name3 = stall_name3
@@ -504,6 +537,13 @@ class stall3_page(webapp2.RequestHandler): #Handler for the stores
                 if items3 == item3["descript3"]:
                     person.food_info3.remove(item3)
             person.put()
+
+        if special_offer3:
+            if special_offer3 == None:
+                person.offer3 = "None"
+            else:
+                person.offer3 = special_offer3
+            person.put()
             
 
         template_values = {
@@ -516,7 +556,8 @@ class stall3_page(webapp2.RequestHandler): #Handler for the stores
                 'food_price3': person.price3,
                 'waiting_time3': person.waiting_time3,
                 'food_info3': person.food_info3,
-                'item_add3': person.item_add3
+                'item_add3': person.item_add3,
+                'special_offer3': person.offer3, ## new
                 }
         template = jinja_environment.get_template('stall3_page.html')
         self.response.out.write(template.render(template_values))
