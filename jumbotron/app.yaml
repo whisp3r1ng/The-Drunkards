@@ -1,0 +1,48 @@
+application: thedrunkards01
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /images
+  static_dir: images
+
+# core bootstrap
+- url: /dist
+  static_dir: dist
+
+# handler for front page
+
+- url: /
+  script: thedrunkards01.app
+
+- url: /about
+  script: thedrunkards01.app
+
+- url: /stall1
+  script: thedrunkards01.app
+
+- url: /stall2
+  script: thedrunkards01.app
+
+- url: /stall3
+  script: thedrunkards01.app
+
+
+# All other pages require login
+- url: /.*
+  script: thedrunkards01.app
+  login: required
+
+libraries:
+- name: jinja2
+  version: latest
+
+- name: webapp2
+  version: latest
+###

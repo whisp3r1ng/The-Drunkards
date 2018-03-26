@@ -1,0 +1,26 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 100px;
+  padding-bottom: 10px;
+}
+
+div{
+    float:left;
+    margin-right:auto;
+}
+
+div > img{
+   height:auto;
+    width:280px;
+}
+
+p{
+    text-align:center;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    clear:both;
+}
+

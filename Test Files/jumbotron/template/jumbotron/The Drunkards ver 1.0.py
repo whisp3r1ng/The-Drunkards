@@ -9,7 +9,7 @@ from google.appengine.ext import ndb
 
 
 jinja_environment = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/Templates"))
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/template"))
 
 class MainPage(webapp2.RequestHandler): #Handler for the main page
 
